@@ -1,0 +1,23 @@
+<div class="container-fluid mx-4 d-flex gap-5" id="create-player">
+  <div>
+    <form
+      (ngSubmit)="onSubmit(playerForm)"
+      #playerForm="ngForm"
+      class="d-grid gap-3 col-sm-4"
+    >
+      <div class="d-grid gap-3 col-sm-4">
+        <input type="text" id="name" name="name" ngModel placeholder="Name" />
+        <input
+          type="text"
+          id="league"
+          name="league"
+          ngModel
+          placeholder="League"
+        />
+        <input type="text" id="tier" name="tier" ngModel placeholder="Tier" />
+        <input type="text" id="lp" name="lp" ngModel placeholder="LP" />
+      </div>
+      <button class="btn btn-primary mt-2 hidden" type="submit">Submit</button>
+    </form>
+  </div>
+</div>

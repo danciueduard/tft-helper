@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+.home-page {
+  /* background-color: lightblue; */
+  background-image: url("../src/assets/tft_background.jpg");
+  height: 100vh;
+}

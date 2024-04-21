@@ -1,0 +1,16 @@
+.player-card {
+  width: 500px;
+  background-size: cover;
+  background-position: center;
+  background-color: white;
+}
+
+.tftlogo {
+  margin-top: 7rem;
+  opacity: 0.8;
+}
+
+span {
+  font-weight: 700;
+  text-transform: capitalize;
+}
