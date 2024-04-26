@@ -6,7 +6,7 @@ import {
   Renderer2,
   ViewChild,
 } from "@angular/core";
-import { PlayerConfirmComponent } from "../player-profile/player-confirm.component";
+import { PlayerConfirmComponent } from "../player-confirm/player-confirm.component";
 import { FormsModule, NgForm } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { ButtonsStateService } from "../../shared/buttons-state.service";

@@ -12,6 +12,7 @@ import { CreatePlayerComponent } from "../create-player/create-player.component"
 import { CommonModule } from "@angular/common";
 import { ButtonsStateService } from "../../shared/buttons-state.service";
 import { Router, Routes } from "@angular/router";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-welcome-page",
@@ -75,6 +76,7 @@ import { Router, Routes } from "@angular/router";
       transition("open => close", [animate("0.1s")]),
     ]),
   ],
+  providers: [HttpClient],
 })
 export class WelcomePageComponent implements OnInit {
   creatingPlayer: string;
@@ -88,6 +90,10 @@ export class WelcomePageComponent implements OnInit {
     this.creatingPlayer === "open"
       ? (this.creatingPlayer = "close")
       : (this.creatingPlayer = "open");
+  }
+
+  goToDashboard() {
+    this.router.navigate(["dashboard"]);
   }
 
   ngOnInit(): void {

@@ -1,0 +1,50 @@
+<div [@fadeInOut]>
+  <div class="container player-card p-4 shadow-lg">
+    <p>
+      Name: <span>{{ name }}</span>
+    </p>
+    <p>
+      League:
+      <span style="text-transform: capitalize">{{ league }}</span>
+    </p>
+
+    <p>
+      League Tier:
+      <span>{{ tier }}</span>
+    </p>
+    <p>
+      LP:
+      <span>{{ lp }}</span>
+    </p>
+  </div>
+
+  <div class="d-flex gap-5 justify-content-center mt-3">
+    <button
+      (click)="cancelForm()"
+      class="btn border border-secondary player-confirm-button"
+    >
+      Discard
+    </button>
+    <button
+      class="btn border border-secondary player-confirm-button"
+      (click)="submitForm()"
+    >
+      Submit
+    </button>
+  </div>
+
+  <div class="container">
+    <div class="d-flex justify-content-center lign-items-center">
+      <img
+        src="../../../assets/tft_logo.png"
+        alt=""
+        width="500px"
+        class="tftlogo"
+      />
+    </div>
+  </div>
+</div>
+
+<div class="container player-card p-4 shadow-lg">
+  <div>Success</div>
+</div>

@@ -12,5 +12,9 @@
 
 span {
   font-weight: 700;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
+}
+
+.player-confirm-button:hover {
+  background-color: rgba(0, 168, 173, 0.11);
 }

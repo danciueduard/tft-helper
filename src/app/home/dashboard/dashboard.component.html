@@ -1,1 +1,27 @@
-<p>dashboard works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Dashboard</h2>
+      <div class="container">
+        <div class="d-flex justify-content-between mt-5">
+          <img src="../../../assets/female-avatar.png" width="100px" alt="" />
+          <button class="btn btn-primary">create match</button>
+        </div>
+        <div class="container">
+          <ul
+            class="mt-3"
+            *ngFor="let match of data; let i = index"
+            [ngClass]="match.data.win ? 'win' : 'lose'"
+          >
+            <p>Match: {{ match.match }}</p>
+            <div class="d-flex justify-content-between px-5 border-bottom">
+              <p>Comp name: {{ match.data.compName }}</p>
+              <p>Champs: {{ match.data.champs | capitalizeArray }}</p>
+              <p>{{ match.data.win ? "Win" : "Lose" }}</p>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
