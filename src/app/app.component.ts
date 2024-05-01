@@ -12,7 +12,6 @@ import { PlayerConfirmComponent } from "./home/create-player/player-confirm/play
 import { animate, style, transition, trigger } from "@angular/animations";
 import { PlayerProfileComponent } from "./player-profile/player-profile.component";
 import { DataStorageService } from "./shared/data-storage.service";
-import { SharedStateService } from "./shared/shared-state.service";
 import { Observable } from "rxjs";
 
 @Component({
@@ -45,14 +44,7 @@ export class AppComponent implements OnInit {
   player: any;
   loggedIn: Observable<boolean>;
 
-  constructor(
-    private contexts: ChildrenOutletContexts,
-    private sharedStateService: SharedStateService
-  ) {}
+  constructor(private contexts: ChildrenOutletContexts) {}
 
-  ngOnInit(): void {
-    this.sharedStateService
-      .getLoggedState()
-      .subscribe((result) => (this.loggedIn = result));
-  }
+  ngOnInit(): void {}
 }

@@ -1,10 +1,11 @@
 import { trigger, transition, style, animate } from "@angular/animations";
 import { Component } from "@angular/core";
+import { RouterModule } from "@angular/router";
 
 @Component({
   selector: "app-load-profile",
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: "./load-profile.component.html",
   styleUrl: "./load-profile.component.css",
   animations: [

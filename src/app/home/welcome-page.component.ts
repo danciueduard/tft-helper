@@ -10,7 +10,6 @@ import {
 } from "@angular/animations";
 import { CreatePlayerComponent } from "./create-player/create-player.component";
 import { CommonModule } from "@angular/common";
-import { SharedStateService } from "../shared/shared-state.service";
 import { ActivatedRoute, Router, RouterModule, Routes } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { LoadProfileComponent } from "./load-profile/load-profile.component";

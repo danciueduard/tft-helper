@@ -9,7 +9,6 @@ import {
 import { PlayerConfirmComponent } from "./player-confirm/player-confirm.component";
 import { FormsModule, NgForm } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import { SharedStateService } from "../../shared/shared-state.service";
 import { Router, RouterModule } from "@angular/router";
 import {
   AnimationEvent,
@@ -65,10 +64,7 @@ export class CreatePlayerComponent implements OnInit {
   animationDone = false;
   expandLine: string = "false";
 
-  constructor(
-    private buttonsStateService: SharedStateService,
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
   @ViewChild("playerForm") playerForm: NgForm;
 
@@ -79,9 +75,6 @@ export class CreatePlayerComponent implements OnInit {
       tier: form.value.tier,
       lp: form.value.lp,
     };
-
-    this.buttonsStateService.setState("close");
-    this.router.navigate(["/new"], { queryParams });
   }
 
   onAnimationDone(event: AnimationEvent) {

@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { User } from "../home/dashboard/comp/player.model";
-import { SharedStateService } from "../shared/shared-state.service";
 
 @Component({
   selector: "app-player-profile",
@@ -10,9 +9,7 @@ import { SharedStateService } from "../shared/shared-state.service";
   styleUrl: "./player-profile.component.css",
 })
 export class PlayerProfileComponent {
-  constructor(private sharedStateService: SharedStateService) {}
+  constructor() {}
 
-  logout() {
-    this.sharedStateService.setLogout();
-  }
+  logout() {}
 }

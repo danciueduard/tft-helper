@@ -3,7 +3,6 @@ import { CommonModule } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
 import { DataStorageService } from "../../../shared/data-storage.service";
-import { SharedStateService } from "../../../shared/shared-state.service";
 import {
   HttpClient,
   HttpClientModule,
@@ -39,7 +38,6 @@ export class PlayerConfirmComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private buttonService: SharedStateService,
     private http: HttpClient,
     private dataStorageService: DataStorageService
   ) {}
@@ -53,7 +51,6 @@ export class PlayerConfirmComponent implements OnInit {
 
   cancelForm() {
     this.router.navigate(["welcome"]);
-    this.buttonService.setState("open");
   }
 
   submitForm() {
