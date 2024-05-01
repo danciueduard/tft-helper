@@ -1,5 +1,12 @@
-<div class="container-fluid mx-4 d-flex gap-5" id="create-player">
+<div
+  [@slideUpAnimation]
+  (@slideUpAnimation.done)="onAnimationDone($event)"
+  class="container mt-5 d-flex gap-5 before-animation-style align-items-center"
+  id="create-player"
+>
   <div>
+    <h5>Create a new profile.</h5>
+    <div [@expandingLine]="expandLine" class="growing-line"></div>
     <form
       (ngSubmit)="onSubmit(playerForm)"
       #playerForm="ngForm"
@@ -19,5 +26,24 @@
       </div>
       <button class="btn btn-primary mt-2 hidden" type="submit">Submit</button>
     </form>
+    <div [@buttonAppearAnimation] *ngIf="animationDone" class="cancel-button">
+      <button
+        [routerLink]="['/welcome']"
+        class="btn border-danger rounded-5 text-danger"
+      >
+        X
+      </button>
+    </div>
+  </div>
+  <div
+    [@pinguAnimation]
+    *ngIf="animationDone"
+    class="container pt-5 d-none d-sm-none d-lg-block d-xl-block d-xxl-block"
+  >
+    <img
+      src="../../../assets/little_legend.png"
+      class="img-fluid little-legend"
+      alt=""
+    />
   </div>
 </div>

@@ -1,12 +1,7 @@
-<div class="row">
-  <input type="text" placeholder="search" class="mx-5 mb-5 col" />
-</div>
-<div class="row">
+<div class="row mt-5">
   <button
-    *ngIf="loadingPlayer === 'close'"
-    [@hideButtons]="creatingPlayer"
-    [@hideButtons]="loadingPlayer"
-    (click)="onCreatingPlayer()"
+    [@hideButtons]="routerOutletState"
+    (click)="navigateToLink('/new')"
     class="btn mx-5 button-home-menu col card-open shadow-sm"
   >
     <i class="bi bi-person-plus-fill h1" style="color: black"></i>
@@ -14,43 +9,15 @@
   </button>
 
   <button
-    *ngIf="loadingPlayer === 'close'"
-    [@hideButtons]="creatingPlayer"
-    [@hideButtons]="loadingPlayer"
-    (click)="onLoadingPlayer()"
+    [@hideButtons]="routerOutletState"
+    (click)="navigateToLink('/load')"
     class="btn mx-5 button-home-menu col card-open shadow-sm"
   >
     <i class="bi bi-person-fill-down h1" style="color: black"></i>
     <p>Load Player</p>
   </button>
 </div>
-<div class="d-flex">
-  <div [@openForm]="creatingPlayer" class="d-flex gap-5">
-    <app-create-player *ngIf="creatingPlayer === 'open'"></app-create-player>
-  </div>
-  <div>
-    <p [@showLegend]="creatingPlayer" class="create-new-player">
-      Create a new player.
-    </p>
-    <div [@horizontalLine]="creatingPlayer" class="horizontal-line"></div>
-    <img
-      [@showLegend]="creatingPlayer"
-      #littleLegend
-      src="../../../assets/little_legend.png"
-      width="500px"
-      class="little-legend"
-    />
-    <button
-      [@showLegend]="creatingPlayer"
-      class="cancelButton btn"
-      (click)="onCreatingPlayer()"
-      [disabled]="creatingPlayer === 'close'"
-    >
-      X
-    </button>
-  </div>
-</div>
 
-<div [@showProfiles]="loadingPlayer" class="d-flex flex-column gap-2">
-  <app-load-profile *ngIf="loadingPlayer === 'open'"></app-load-profile>
+<div class="container">
+  <router-outlet></router-outlet>
 </div>

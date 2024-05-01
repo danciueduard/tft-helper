@@ -4,17 +4,30 @@ import { PlayerConfirmComponent } from "./home/create-player/player-confirm/play
 import { DashboardComponent } from "./home/dashboard/dashboard.component";
 import { animation } from "@angular/animations";
 import { PlayerProfileComponent } from "./player-profile/player-profile.component";
+import { CreatePlayerComponent } from "./home/create-player/create-player.component";
+import { LoadProfileComponent } from "./home/load-profile/load-profile.component";
 
 export const routes: Routes = [
   { path: "", redirectTo: "/welcome", pathMatch: "full" },
-  { path: "welcome", component: WelcomePageComponent },
+  {
+    path: "welcome",
+    component: WelcomePageComponent,
+  },
   {
     path: "new",
-    component: PlayerConfirmComponent,
+    component: CreatePlayerComponent,
     data: {
       animation: "enterLeavePage",
     },
   },
+  {
+    path: "load",
+    component: LoadProfileComponent,
+    data: {
+      animation: "enterLeavePage",
+    },
+  },
+
   {
     path: "dashboard",
     children: [{ path: "player/:id", component: PlayerProfileComponent }],

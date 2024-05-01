@@ -1,7 +1,12 @@
 import { CommonModule } from "@angular/common";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import { ChildrenOutletContexts, RouterOutlet } from "@angular/router";
+import {
+  ChildrenOutletContexts,
+  Router,
+  RouterModule,
+  RouterOutlet,
+} from "@angular/router";
 import { CreatePlayerComponent } from "./home/create-player/create-player.component";
 import { PlayerConfirmComponent } from "./home/create-player/player-confirm/player-confirm.component";
 import { animate, style, transition, trigger } from "@angular/animations";
@@ -20,6 +25,7 @@ import { Observable } from "rxjs";
     CreatePlayerComponent,
     PlayerConfirmComponent,
     PlayerProfileComponent,
+    RouterModule,
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",

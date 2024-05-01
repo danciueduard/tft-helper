@@ -5,4 +5,10 @@
       <router-outlet></router-outlet>
     </div>
   </div>
+  <div class="position-absolute d-flex flex-column gap-3">
+    <a [routerLink]="['/new']" class="btn btn-primary">NEW</a>
+    <a [routerLink]="['/load']" class="btn btn-primary">LOAD</a>
+    <a [routerLink]="['/dashboard']" class="btn btn-primary">DASHBOARD</a>
+    <a [routerLink]="['/']" class="btn btn-primary">HOME</a>
+  </div>
 </div>
