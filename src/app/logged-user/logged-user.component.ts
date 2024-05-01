@@ -5,10 +5,10 @@ import { User } from "../home/dashboard/comp/player.model";
   selector: "app-player-profile",
   standalone: true,
   imports: [],
-  templateUrl: "./player-profile.component.html",
-  styleUrl: "./player-profile.component.css",
+  templateUrl: "./logged-user.component.html",
+  styleUrl: "./logged-user.component.css",
 })
-export class PlayerProfileComponent {
+export class LoggedUserComponent {
   constructor() {}
 
   logout() {}

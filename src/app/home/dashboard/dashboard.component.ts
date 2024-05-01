@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { DataStorageService } from "../../shared/data-storage.service";
-import { PlayerProfileComponent } from "../../player-profile/player-profile.component";
+import { LoggedUserComponent } from "../../logged-user/logged-user.component";
 import { mockData } from "./mockData";
 import { CapitalizeArrayPipe } from "./dashboard-comp.pipe";
 import { CommonModule } from "@angular/common";
@@ -10,7 +10,7 @@ import { CreateMatchComponent } from "./create-match/create-match.component";
   selector: "app-dashboard",
   standalone: true,
   imports: [
-    PlayerProfileComponent,
+    LoggedUserComponent,
     CapitalizeArrayPipe,
     CommonModule,
     CreateMatchComponent,

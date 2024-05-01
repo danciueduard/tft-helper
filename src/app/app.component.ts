@@ -10,7 +10,7 @@ import {
 import { CreatePlayerComponent } from "./home/create-player/create-player.component";
 import { PlayerConfirmComponent } from "./home/create-player/player-confirm/player-confirm.component";
 import { animate, style, transition, trigger } from "@angular/animations";
-import { PlayerProfileComponent } from "./player-profile/player-profile.component";
+import { LoggedUserComponent } from "./logged-user/logged-user.component";
 import { DataStorageService } from "./shared/data-storage.service";
 import { Observable } from "rxjs";
 
@@ -23,7 +23,7 @@ import { Observable } from "rxjs";
     CommonModule,
     CreatePlayerComponent,
     PlayerConfirmComponent,
-    PlayerProfileComponent,
+    LoggedUserComponent,
     RouterModule,
   ],
   templateUrl: "./app.component.html",
