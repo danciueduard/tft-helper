@@ -1,0 +1,7 @@
+.profiles-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 400px;
+  overflow: auto;
+}

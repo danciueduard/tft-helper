@@ -6,10 +6,10 @@ import {
   Renderer2,
   ViewChild,
 } from "@angular/core";
-import { PlayerConfirmComponent } from "../player-confirm/player-confirm.component";
+import { PlayerConfirmComponent } from "./player-confirm/player-confirm.component";
 import { FormsModule, NgForm } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import { ButtonsStateService } from "../../shared/buttons-state.service";
+import { SharedStateService } from "../../shared/shared-state.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -23,7 +23,7 @@ export class CreatePlayerComponent implements OnInit {
   elementRef: any;
 
   constructor(
-    private buttonsStateService: ButtonsStateService,
+    private buttonsStateService: SharedStateService,
     private router: Router
   ) {}
 
@@ -37,7 +37,7 @@ export class CreatePlayerComponent implements OnInit {
       lp: form.value.lp,
     };
 
-    // this.buttonsStateService.setState("close");
+    this.buttonsStateService.setState("close");
     this.router.navigate(["/new"], { queryParams });
   }
 

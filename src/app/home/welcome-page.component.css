@@ -57,7 +57,7 @@ p {
   }
 }
 
-.absolute {
+.create-new-player {
   position: absolute;
   top: 12.5rem;
   left: 5.3rem;
@@ -83,4 +83,8 @@ p {
   border: 1px solid rgba(0, 0, 0, 0.603);
   border-radius: 100%;
   background-color: rgba(255, 255, 255, 0);
+}
+
+.profiles-container {
+  height: 100px;
 }

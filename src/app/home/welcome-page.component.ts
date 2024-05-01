@@ -8,16 +8,17 @@ import {
   transition,
   // ...
 } from "@angular/animations";
-import { CreatePlayerComponent } from "../create-player/create-player.component";
+import { CreatePlayerComponent } from "./create-player/create-player.component";
 import { CommonModule } from "@angular/common";
-import { ButtonsStateService } from "../../shared/buttons-state.service";
+import { SharedStateService } from "../shared/shared-state.service";
 import { Router, Routes } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
+import { LoadProfileComponent } from "../load-profile/load-profile.component";
 
 @Component({
   selector: "app-welcome-page",
   standalone: true,
-  imports: [CreatePlayerComponent, CommonModule],
+  imports: [CreatePlayerComponent, CommonModule, LoadProfileComponent],
   templateUrl: "./welcome-page.component.html",
   styleUrl: "./welcome-page.component.css",
   animations: [
@@ -31,6 +32,7 @@ import { HttpClient } from "@angular/common/http";
       ),
       // state("close", style({})),
       transition("open <=> close", [animate("0.6s")]),
+      // transition("open => void", [animate("0.6s")]),
     ]),
     trigger("openForm", [
       state(
@@ -75,14 +77,30 @@ import { HttpClient } from "@angular/common/http";
       transition("close => open", [animate("0.7s 0.8s")]),
       transition("open => close", [animate("0.1s")]),
     ]),
+    trigger("showProfiles", [
+      state("open", style({})),
+
+      transition("close => open", [animate("0.7s")]),
+      transition("open => close", [animate("0.1s")]),
+    ]),
+    ///////////////////////////////////////////////////////////////////
+    trigger("fadeInOut", [
+      transition(":enter", [
+        style({ opacity: 0 }),
+        animate("300ms", style({ opacity: 1 })),
+      ]),
+      transition(":leave", [animate("300ms", style({ opacity: 0 }))]),
+    ]),
+    //////////////////////////////////////////////////////////////////
   ],
   providers: [HttpClient],
 })
 export class WelcomePageComponent implements OnInit {
   creatingPlayer: string;
+  loadingPlayer = "close";
 
   constructor(
-    private buttonsStateService: ButtonsStateService,
+    private sharedStateService: SharedStateService,
     private router: Router
   ) {}
 
@@ -91,13 +109,18 @@ export class WelcomePageComponent implements OnInit {
       ? (this.creatingPlayer = "close")
       : (this.creatingPlayer = "open");
   }
+  onLoadingPlayer() {
+    this.loadingPlayer === "open"
+      ? (this.loadingPlayer = "close")
+      : (this.loadingPlayer = "open");
+  }
 
   goToDashboard() {
     this.router.navigate(["dashboard"]);
   }
 
   ngOnInit(): void {
-    this.buttonsStateService.state$.subscribe((state) => {
+    this.sharedStateService.buttonsState$.subscribe((state) => {
       this.creatingPlayer = state;
     });
   }

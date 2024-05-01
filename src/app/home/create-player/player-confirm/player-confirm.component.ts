@@ -2,8 +2,8 @@ import { trigger, transition, style, animate } from "@angular/animations";
 import { CommonModule } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
-import { DataStorageService } from "../../shared/data-storage.service";
-import { ButtonsStateService } from "../../shared/buttons-state.service";
+import { DataStorageService } from "../../../shared/data-storage.service";
+import { SharedStateService } from "../../../shared/shared-state.service";
 import {
   HttpClient,
   HttpClientModule,
@@ -12,7 +12,7 @@ import {
 } from "@angular/common/http";
 
 @Component({
-  selector: "app-player-profile",
+  selector: "app-confirm-profile",
   standalone: true,
   imports: [CommonModule, HttpClientModule],
   templateUrl: "./player-confirm.component.html",
@@ -39,7 +39,7 @@ export class PlayerConfirmComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private buttonService: ButtonsStateService,
+    private buttonService: SharedStateService,
     private http: HttpClient,
     private dataStorageService: DataStorageService
   ) {}

@@ -5,7 +5,9 @@
       <div class="container">
         <div class="d-flex justify-content-between mt-5">
           <img src="../../../assets/female-avatar.png" width="100px" alt="" />
-          <button class="btn btn-primary">create match</button>
+          <button class="btn btn-primary" (click)="createMatch()">
+            create match
+          </button>
         </div>
         <div class="container">
           <ul
@@ -25,3 +27,8 @@
     </div>
   </div>
 </div>
+
+<app-create-match
+  *ngIf="createMode"
+  (closeWindow)="cancelCreateMatch()"
+></app-create-match>

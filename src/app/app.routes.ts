@@ -1,9 +1,9 @@
 import { Routes } from "@angular/router";
-import { WelcomePageComponent } from "./home/welcome-page/welcome-page.component";
-import { PlayerConfirmComponent } from "./home/player-confirm/player-confirm.component";
+import { WelcomePageComponent } from "./home/welcome-page.component";
+import { PlayerConfirmComponent } from "./home/create-player/player-confirm/player-confirm.component";
 import { DashboardComponent } from "./home/dashboard/dashboard.component";
 import { animation } from "@angular/animations";
-import { PlayerProfileComponent } from "./home/dashboard/player-profile/player-profile.component";
+import { PlayerProfileComponent } from "./player-profile/player-profile.component";
 
 export const routes: Routes = [
   { path: "", redirectTo: "/welcome", pathMatch: "full" },

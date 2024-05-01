@@ -1,9 +1,8 @@
 <div class="home-page">
-  <div class="pt-5 p-flex">
-    <div class="container p-5 border rounded-4 background-opaque">
-      <div [@fadeInOut]>
-        <router-outlet></router-outlet>
-      </div>
+  <app-player-profile *ngIf="loggedIn"></app-player-profile>
+  <div class="container p-5 border rounded-4 background-opaque">
+    <div [@fadeInOut]>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
