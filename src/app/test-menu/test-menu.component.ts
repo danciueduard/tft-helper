@@ -18,17 +18,26 @@ export class TestMenuComponent {
 
   onPushData() {
     this.httpRequestsService.addDummyData();
+    console.log("test profiles pushed");
   }
 
   onGetData() {
     this.httpRequestsService
       .fetchAllPosts()
       .subscribe((response) => console.log(response));
+    console.log("profiles loaded");
   }
 
   onGetActiveProfile() {
     this.dataStorageService
-      .getProfile()
-      .subscribe((response) => console.log(response));
+      .getActiveProfile()
+      .subscribe((response) =>
+        console.log(response === null ? "no profile active" : response)
+      );
+  }
+
+  onLogout() {
+    this.dataStorageService.logoutProfile();
+    console.log("logged out");
   }
 }

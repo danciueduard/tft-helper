@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output } from "@angular/core";
 import {
   ChildrenOutletContexts,
   Router,
@@ -14,6 +14,8 @@ import { Observable } from "rxjs";
 import { TestMenuComponent } from "./test-menu/test-menu.component";
 import { CreatePlayerComponent } from "./profiles/create-player/create-player.component";
 import { PlayerConfirmComponent } from "./profiles/create-player/player-confirm/player-confirm.component";
+import { DataStorageService } from "./shared/data-storage.service";
+import { LoadedProfile } from "./shared/models/loadedProfile.model";
 
 @Component({
   selector: "app-root",
@@ -43,10 +45,15 @@ import { PlayerConfirmComponent } from "./profiles/create-player/player-confirm/
 })
 export class AppComponent implements OnInit {
   title = "tft-helper";
-  player: any;
-  loggedIn: Observable<boolean>;
+  activeProfile: string | null = null;
 
-  constructor(private contexts: ChildrenOutletContexts) {}
+  constructor(private dataStorageService: DataStorageService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.dataStorageService.getActiveProfile().subscribe((response) => {
+      response?.playerName === undefined
+        ? (this.activeProfile = null)
+        : (this.activeProfile = response.playerName!);
+    });
+  }
 }

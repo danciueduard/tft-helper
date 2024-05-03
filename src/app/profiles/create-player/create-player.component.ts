@@ -78,12 +78,10 @@ export class CreatePlayerComponent implements OnInit {
   }
 
   onAnimationDone(event: AnimationEvent) {
-    console.log(event);
     if (event.fromState === "void" || event.phaseName === "") {
       // Animation is complete
       this.animationDone = true;
       this.expandLine = "expand";
-      console.log(this.animationDone);
     }
   }
 

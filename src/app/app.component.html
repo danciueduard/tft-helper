@@ -1,5 +1,8 @@
 <div class="home-page">
-  <app-player-profile></app-player-profile>
+  <app-logged-user
+    *ngIf="activeProfile"
+    [loadedProfile]="activeProfile"
+  ></app-logged-user>
   <div class="container p-5 border rounded-4 background-opaque">
     <div [@fadeInOut]>
       <router-outlet></router-outlet>

@@ -31,28 +31,12 @@ export class LoadProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProfiles();
-    console.log(this.profiles);
-  }
-
-  getProfiles() {
-    this.httpRequestsService.fetchAllPosts().subscribe((response) => {
-      for (let item of response) {
-        this.profiles.push(
-          new Profile(
-            item.league,
-            item.leagueTier,
-            item.lpPlayer,
-            item.matchCounter,
-            item.playerId,
-            item.playerName
-          )
-        );
-      }
-    });
+    this.dataStorageService
+      .getProfiles()
+      .subscribe((response) => (this.profiles = response!));
   }
 
   useProfile(name: string) {
-    this.dataStorageService.setProfile(name);
+    this.dataStorageService.setActiveProfile(name);
   }
 }
