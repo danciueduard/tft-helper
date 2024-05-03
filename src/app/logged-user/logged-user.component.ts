@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { User } from "../home/dashboard/comp/player.model";
 
 @Component({
   selector: "app-player-profile",

@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { DataStorageService } from "../../shared/data-storage.service";
+import { HttpRequestsService } from "../../shared/http-requests.service";
 import { LoggedUserComponent } from "../../logged-user/logged-user.component";
 import { mockData } from "./mockData";
 import { CapitalizeArrayPipe } from "./dashboard-comp.pipe";
@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
   //Temporary!
   data = mockData;
 
-  constructor(private dataStorageService: DataStorageService) {}
+  constructor(private dataStorageService: HttpRequestsService) {}
 
   ngOnInit(): void {
     // this.dataStorageService

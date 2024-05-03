@@ -1,43 +1,27 @@
-import { HttpClient, HttpClientModule } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Injectable, OnInit } from "@angular/core";
+import { HttpRequestsService } from "./http-requests.service";
+import { BehaviorSubject, Observable, map } from "rxjs";
+import { Profile } from "./models/profile.model";
+import { LoadedProfile } from "./models/loadedProfile.model";
 
 @Injectable({ providedIn: "root" })
 export class DataStorageService {
-  constructor(private http: HttpClient) {}
+  private profileSubject = new BehaviorSubject<LoadedProfile | null>(null);
+  loadedProfile$ = this.profileSubject.asObservable();
 
-  fetchPosts(): Observable<any> {
-    return this.http.get("http://localhost:8080/player/get/{id}?id=1");
+  constructor(private httpRequestsService: HttpRequestsService) {}
+
+  setProfile(name: string) {
+    this.httpRequestsService.fetchProfileByName(name).subscribe((response) => {
+      this.profileSubject.next(response);
+    });
   }
 
-  // onAddPost(name: string, league: string, tier: number, lp: number) {
-  //   this.http.post(
-  //     "http://localhost:8080/player/create",
-  //     {
-  //       name: name,
-  //       league: league,
-  //       leagueTier: tier,
-  //       lp: lp,
-  //     },
-  //     { observe: "response" }
-  //   );
-  // }
+  getProfile() {
+    return this.loadedProfile$;
+  }
 
-  addPost(
-    name: string,
-    league: string,
-    tier: number,
-    lp: number
-  ): Observable<any> {
-    const data = {
-      name: name,
-      league: league,
-      tier: tier,
-      lp: lp,
-    };
-    // Using { observe: 'response' } to observe the full HTTP response
-    return this.http.post<any>("http://localhost:8080/player/create", data, {
-      observe: "response",
-    });
+  logoutProfile() {
+    this.profileSubject.next(null);
   }
 }

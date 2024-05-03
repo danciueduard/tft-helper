@@ -2,7 +2,7 @@ import { trigger, transition, style, animate } from "@angular/animations";
 import { CommonModule } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
-import { DataStorageService } from "../../../shared/data-storage.service";
+import { HttpRequestsService } from "../../../shared/http-requests.service";
 import {
   HttpClient,
   HttpClientModule,
@@ -39,7 +39,7 @@ export class PlayerConfirmComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private dataStorageService: DataStorageService
+    private dataStorageService: HttpRequestsService
   ) {}
 
   ngOnInit(): void {

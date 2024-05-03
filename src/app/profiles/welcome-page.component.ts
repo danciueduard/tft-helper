@@ -11,7 +11,6 @@ import {
 import { CreatePlayerComponent } from "./create-player/create-player.component";
 import { CommonModule } from "@angular/common";
 import { ActivatedRoute, Router, RouterModule, Routes } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
 import { LoadProfileComponent } from "./load-profile/load-profile.component";
 
 @Component({
