@@ -1,9 +1,17 @@
-<h5 class="position-absolute mt-5">Load profile</h5>
 <div class="row">
-  <input type="text" placeholder="search" class="mx-5 mb-5 col" />
+  <input type="text" placeholder="search" class="mx-5 mb-4 col" />
+  <h5 class="mb-3">
+    {{ profiles.length === 0 ? "No profiles created!" : "Load your profile" }}
+  </h5>
 </div>
+
 <div [@slideUpAnimation]>
   <div class="profiles-container">
+    <div class="d-flex justify-content-center align-items-center">
+      <h4 *ngIf="errors">
+        {{ errors }}
+      </h4>
+    </div>
     <div class="d-flex justify-content-center" *ngFor="let profile of profiles">
       <div class="border p-4 shadow">
         <div>

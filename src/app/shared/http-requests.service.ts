@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, map } from "rxjs";
+import { Profile } from "./models/profile.model";
 
 @Injectable({ providedIn: "root" })
 export class HttpRequestsService {
@@ -10,7 +11,7 @@ export class HttpRequestsService {
     return this.http.get(`http://localhost:8080/player/get?playerName=${name}`);
   }
 
-  fetchAllPosts(): Observable<any> {
+  fetchAllPosts(): Observable<Profile> | any {
     return this.http.get("http://localhost:8080/player/get-all");
   }
 

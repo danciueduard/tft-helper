@@ -1,9 +1,9 @@
 import { trigger, transition, style, animate } from "@angular/animations";
-import { Component, OnInit } from "@angular/core";
-import { Data, RouterModule } from "@angular/router";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { RouterModule } from "@angular/router";
 import { Profile } from "../../shared/models/profile.model";
 import { DataStorageService } from "../../shared/data-storage.service";
-import { Observable, map } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { HttpRequestsService } from "../../shared/http-requests.service";
 import { CommonModule } from "@angular/common";
 
@@ -22,8 +22,10 @@ import { CommonModule } from "@angular/common";
     ]),
   ],
 })
-export class LoadProfileComponent implements OnInit {
-  public profiles: Profile[] = [];
+export class LoadProfileComponent implements OnInit, OnDestroy {
+  profiles: Profile[] = [];
+  errors: any = "";
+  private profilesSubscription: Subscription | null = null;
 
   constructor(
     private httpRequestsService: HttpRequestsService,
@@ -31,12 +33,40 @@ export class LoadProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dataStorageService
-      .getProfiles()
-      .subscribe((response) => (this.profiles = response!));
+    this.loadProfiles();
+    console.log(this.profiles);
   }
 
   useProfile(name: string) {
     this.dataStorageService.setActiveProfile(name);
+  }
+
+  ngOnDestroy(): void {
+    this.profilesSubscription?.unsubscribe();
+  }
+
+  loadProfiles() {
+    this.profilesSubscription = this.httpRequestsService
+      .fetchAllPosts()
+      .subscribe({
+        next: (response: any) => {
+          this.profiles = response.map(
+            (profile: Profile) =>
+              new Profile(
+                profile.league,
+                profile.leagueTier,
+                profile.lpPlayer,
+                profile.matchCounter,
+                profile.playerId,
+                profile.playerName
+              )
+          );
+        },
+        error: (error: Error) => {
+          this.errors = "Error loading the data...";
+          console.log(error);
+          // Handle the error as needed, e.g., display an error message
+        },
+      });
   }
 }

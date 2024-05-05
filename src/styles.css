@@ -5,3 +5,7 @@
   background-image: url("../src/assets/tft_background.jpg");
   height: 100vh;
 }
+
+body {
+  overflow: hidden; /* Hide scrollbars */
+}

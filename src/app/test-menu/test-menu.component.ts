@@ -24,7 +24,7 @@ export class TestMenuComponent {
   onGetData() {
     this.httpRequestsService
       .fetchAllPosts()
-      .subscribe((response) => console.log(response));
+      .subscribe((response: any) => console.log(response));
     console.log("profiles loaded");
   }
 
