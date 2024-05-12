@@ -9,7 +9,7 @@ import {
 import { PlayerConfirmComponent } from "./player-confirm/player-confirm.component";
 import { FormsModule, NgForm } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import { Router, RouterModule } from "@angular/router";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import {
   AnimationEvent,
   animate,
@@ -61,10 +61,12 @@ import {
 })
 export class CreatePlayerComponent implements OnInit {
   elementRef: any;
+  invalidForm: boolean;
   animationDone = false;
   expandLine: string = "false";
+  createMode: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   @ViewChild("playerForm") playerForm: NgForm;
 
@@ -75,6 +77,10 @@ export class CreatePlayerComponent implements OnInit {
       tier: form.value.tier,
       lp: form.value.lp,
     };
+    this.router.navigate(["confirm"], {
+      queryParams: queryParams,
+      relativeTo: this.activatedRoute,
+    });
   }
 
   onAnimationDone(event: AnimationEvent) {

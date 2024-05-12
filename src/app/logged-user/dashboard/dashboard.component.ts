@@ -1,10 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { HttpRequestsService } from "../../shared/http-requests.service";
 import { LoggedUserComponent } from "../../logged-user/logged-user.component";
 import { mockData } from "./mockData";
 import { CapitalizeArrayPipe } from "./dashboard-comp.pipe";
 import { CommonModule } from "@angular/common";
 import { CreateMatchComponent } from "./create-match/create-match.component";
+import { DataStorageService } from "../../shared/data-storage.service";
+import { LoadedProfile } from "../../shared/models/loadedProfile.model";
 
 @Component({
   selector: "app-dashboard",
@@ -19,18 +20,17 @@ import { CreateMatchComponent } from "./create-match/create-match.component";
   styleUrl: "./dashboard.component.css",
 })
 export class DashboardComponent implements OnInit {
-  // users: {}; Later, when Fetch All Users will be implemented
+  activeProfile: any | LoadedProfile;
   createMode: boolean = false;
 
   //Temporary!
   data = mockData;
 
-  constructor(private dataStorageService: HttpRequestsService) {}
+  constructor(private dataStorageService: DataStorageService) {}
 
   ngOnInit(): void {
-    // this.dataStorageService
-    //   .fetchPosts()
-    //   .subscribe((response) => console.log(response));
+    this.activeProfile = this.dataStorageService.getActiveProfile();
+    console.log(this.activeProfile.source.value);
   }
 
   createMatch() {

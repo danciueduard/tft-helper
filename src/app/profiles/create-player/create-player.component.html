@@ -13,18 +13,63 @@
       class="d-grid gap-3 col-sm-4"
     >
       <div class="d-grid gap-3 col-sm-4">
-        <input type="text" id="name" name="name" ngModel placeholder="Name" />
         <input
+          class="form-control"
+          type="text"
+          id="name"
+          name="name"
+          ngModel
+          placeholder="Name"
+          required
+        />
+        <input
+          required
+          pattern="[a-zA-Z]+"
+          class="form-control"
           type="text"
           id="league"
           name="league"
           ngModel
           placeholder="League"
         />
-        <input type="text" id="tier" name="tier" ngModel placeholder="Tier" />
-        <input type="text" id="lp" name="lp" ngModel placeholder="LP" />
+        <input
+          type="number"
+          min="1"
+          max="5"
+          maxlength="1"
+          pattern="^[0-9]+$"
+          class="form-control"
+          type="text"
+          id="tier"
+          name="tier"
+          ngModel
+          placeholder="Tier"
+          required
+        />
+        <input
+          type="number"
+          min="0"
+          max="99"
+          maxlength="2"
+          pattern="^[0-9]+$"
+          class="form-control"
+          type="text"
+          id="lp"
+          name="lp"
+          ngModel
+          placeholder="LP"
+          required
+        />
       </div>
-      <button class="btn btn-primary mt-2 hidden" type="submit">Submit</button>
+      <p *ngIf="invalidForm" class="m-0 p-0 text-danger">Form is invalid!</p>
+
+      <button
+        class="btn btn-primary mt-2 hidden"
+        type="submit"
+        [disabled]="playerForm.invalid"
+      >
+        Submit
+      </button>
     </form>
     <div [@buttonAppearAnimation] *ngIf="animationDone" class="cancel-button">
       <button
@@ -46,4 +91,11 @@
       alt=""
     />
   </div>
+</div>
+
+<!-- <div
+  class="shadow position-absolute top-50 start-50 translate-middle rounded-4"
+></div> -->
+<div class="position-absolute top-50 start-50 translate-middle">
+  <router-outlet></router-outlet>
 </div>

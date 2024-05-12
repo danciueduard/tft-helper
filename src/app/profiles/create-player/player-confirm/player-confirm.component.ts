@@ -1,7 +1,13 @@
-import { trigger, transition, style, animate } from "@angular/animations";
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+  state,
+} from "@angular/animations";
 import { CommonModule } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
-import { ActivatedRoute, Data, Router } from "@angular/router";
+import { ActivatedRoute, Data, Router, RouterModule } from "@angular/router";
 import { HttpRequestsService } from "../../../shared/http-requests.service";
 import {
   HttpClient,
@@ -13,7 +19,7 @@ import {
 @Component({
   selector: "app-confirm-profile",
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, RouterModule],
   templateUrl: "./player-confirm.component.html",
   styleUrl: "./player-confirm.component.css",
   animations: [
@@ -24,6 +30,12 @@ import {
       ]),
       transition(":leave", [animate("0.5s", style({ opacity: 0 }))]),
     ]),
+    trigger("progress", [
+      transition(":enter", [
+        style({ width: "0px" }),
+        animate("3s", style({ width: "500px" })),
+      ]),
+    ]),
   ],
   providers: [HttpClient],
 })
@@ -32,8 +44,16 @@ export class PlayerConfirmComponent implements OnInit {
   league: string;
   tier: number;
   lp: number;
+
   isLoading: boolean = false;
-  response: string;
+  submitMessage: {
+    valid: boolean;
+    message: string | null;
+  } = {
+    valid: true,
+    message: null,
+  };
+  validForm: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +63,7 @@ export class PlayerConfirmComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.validForm = this.route.snapshot.parent?.data["validForm"];
     this.name = this.route.snapshot.queryParams["name"];
     this.league = this.route.snapshot.queryParams["league"];
     this.tier = this.route.snapshot.queryParams["tier"];
@@ -53,12 +74,30 @@ export class PlayerConfirmComponent implements OnInit {
     this.router.navigate(["welcome"]);
   }
 
+  // BUG! if username contains spaces, it will submit as valid and will not check if it already exists
   submitForm() {
+    const nameWithoutSpaces = this.name.replace(/\s/g, "");
+    // Just in case the name contains any spaces. Can cause bugs with backend interraction
     this.dataStorageService
-      .addPost(this.name, this.league, this.tier, this.lp)
+      .addPost(nameWithoutSpaces, this.league, this.tier, this.lp)
       .subscribe({
-        next: (success) => console.log(success.ok),
-        error: (error) => console.error(error.error.DES),
+        next: (success) => {
+          this.submitMessage.valid = true;
+          this.submitMessage.message = "Profile created successfully";
+
+          setTimeout(() => {
+            this.router.navigate(["/load"]);
+          }, 3000);
+        },
+        error: (error) => {
+          this.submitMessage.valid = false;
+          if (!error.error.DES) {
+            this.submitMessage.message = "An error has been occured";
+          } else this.submitMessage.message = error.error.DES;
+          setTimeout(() => {
+            this.router.navigate(["/new"]);
+          }, 3000);
+        },
         complete: () => console.info("complete"),
       });
   }

@@ -34,7 +34,6 @@ export class LoadProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadProfiles();
-    console.log(this.profiles);
   }
 
   useProfile(name: string) {

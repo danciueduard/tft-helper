@@ -13,12 +13,20 @@ export const routes: Routes = [
     path: "welcome",
     component: WelcomePageComponent,
   },
+
   {
     path: "new",
     component: CreatePlayerComponent,
     data: {
       animation: "enterLeavePage",
+      validForm: true,
     },
+    children: [
+      {
+        path: "confirm",
+        component: PlayerConfirmComponent,
+      },
+    ],
   },
   {
     path: "load",

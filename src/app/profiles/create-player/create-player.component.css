@@ -27,3 +27,9 @@ input {
   width: 0px;
   margin-bottom: 2rem;
 }
+
+input.ng-invalid.ng-touched {
+  position: relative;
+  background-color: rgba(255, 0, 0, 0.041);
+  border-color: rgba(255, 0, 0, 0.13);
+}
