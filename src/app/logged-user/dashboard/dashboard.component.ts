@@ -1,11 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { LoggedUserComponent } from "../../logged-user/logged-user.component";
-import { mockData } from "./mockData";
 import { CapitalizeArrayPipe } from "./dashboard-comp.pipe";
 import { CommonModule } from "@angular/common";
 import { CreateMatchComponent } from "./create-match/create-match.component";
 import { DataStorageService } from "../../shared/data-storage.service";
 import { LoadedProfile } from "../../shared/models/loadedProfile.model";
+import { HttpRequestsService } from "../../shared/http-requests.service";
 
 @Component({
   selector: "app-dashboard",
@@ -21,23 +21,25 @@ import { LoadedProfile } from "../../shared/models/loadedProfile.model";
 })
 export class DashboardComponent implements OnInit {
   activeProfile: any | LoadedProfile;
+  activeProfileComps: any[] = [];
   createMode: boolean = false;
 
-  //Temporary!
-  data = mockData;
-
-  constructor(private dataStorageService: DataStorageService) {}
+  constructor(
+    private dataStorageService: DataStorageService,
+    private httpRequestsService: HttpRequestsService
+  ) {}
 
   ngOnInit(): void {
-    this.activeProfile = this.dataStorageService.getActiveProfile();
-    console.log(this.activeProfile.source.value);
+    this.dataStorageService
+      .getActiveProfile()
+      .pipe((data: any) => (this.activeProfile = data.source.value));
   }
 
   createMatch() {
     this.createMode = true;
   }
 
-  cancelCreateMatch() {
+  createModeOff() {
     this.createMode = false;
   }
 }

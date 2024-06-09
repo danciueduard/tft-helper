@@ -40,9 +40,7 @@ export class LoadProfileComponent implements OnInit, OnDestroy {
     this.dataStorageService.setActiveProfile(name);
   }
 
-  ngOnDestroy(): void {
-    this.profilesSubscription?.unsubscribe();
-  }
+
 
   loadProfiles() {
     this.profilesSubscription = this.httpRequestsService
@@ -67,5 +65,9 @@ export class LoadProfileComponent implements OnInit, OnDestroy {
           // Handle the error as needed, e.g., display an error message
         },
       });
+  }
+
+  ngOnDestroy(): void {
+    this.profilesSubscription?.unsubscribe();
   }
 }

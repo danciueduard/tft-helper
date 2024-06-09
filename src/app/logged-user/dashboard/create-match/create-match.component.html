@@ -4,17 +4,28 @@
   style="width: 60rem"
 >
   <div class="container">
-    <div class="form">
+    <form class="form" #compForm="ngForm">
       <h3>Create match.</h3>
-      <div class="d-flex gap-3 align-items-center">
+      <div class="d-flex gap-3 align-items-center" ngModelGroup="existingComp">
         <label for="compName">Comp Name</label>
-        <select class="form-select" id="compName" style="width: 20rem">
+        <select
+          class="form-select"
+          id="compName"
+          style="width: 20rem"
+          name="compName"
+          ngModel
+          [disabled]="newComp"
+        >
           <option selected>Use existing comp</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option
+            selected
+            *ngFor="let comp of loadedComps"
+            value="{{ comp.compName }}"
+          >
+            {{ comp.compName }} | Tier: {{ comp.tier }} | W: {{ comp.wins }}
+          </option>
         </select>
-        <button class="btn btn-primary" (click)="toggleNewComp()">
+        <button class="btn btn-primary" type="button" (click)="toggleNewComp()">
           Add new comp
         </button>
         <div class="form-check form-switch">
@@ -22,21 +33,115 @@
             class="form-check-input"
             type="checkbox"
             id="flexSwitchCheckDefault"
+            [disabled]="newComp"
+            ngModel
+            name="win"
           />
           <label class="form-check-label" for="flexSwitchCheckDefault"
             >Win</label
           >
         </div>
-      </div>
-      <div *ngIf="newComp">
-        <label class="mt-5">New Comp:</label>
-        <input type="text" class="form-control" placeholder="Comp Name" />
-        <div class="form-group d-flex gap-3 my-1" formGroup="newComp">
-          <input type="text" class="form-control" placeholder="Champion 1" />
-          <input type="text" class="form-control" placeholder="Champion 2" />
-          <input type="text" class="form-control" placeholder="Champion 3" />
-          <input type="text" class="form-control" placeholder="Champion 4" />
+        <div class="mx-4 d-flex gap-2 align-items-center">
+          <label for="lp">LP</label>
+          <input
+            class="form-control"
+            [ngStyle]="{ width: '4rem' }"
+            id="lp"
+            type="number"
+            ngModel
+            name="lp"
+            [disabled]="newComp"
+          />
         </div>
+      </div>
+
+      <!-- ///////// -->
+      <!--  NEW COMP -->
+      <!-- ///////// -->
+
+      <div *ngIf="newComp" ngModelGroup="newComp">
+        <label class="mt-5 h5">New Comp:</label>
+
+        <div
+          class="form-check form-switch d-flex gap-3 align-items-center mb-3"
+        >
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="newCompWinOrLose"
+            ngModel
+            name="win"
+          />
+          <label class="form-check-label" for="flexSwitchCheckDefault"
+            >Win</label
+          >
+
+          <div class="d-flex gap-2 align-items-center px-5">
+            <label for="compName">Tier</label>
+            <select class="form-select" id="tier" name="tier" ngModel>
+              <option value="S">S</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+            </select>
+          </div>
+          <div class="mx-4 d-flex gap-2 align-items-center">
+            <label for="lp">LP</label>
+            <input
+              class="form-control"
+              [ngStyle]="{ width: '4rem' }"
+              id="lp"
+              type="number"
+              name="lp"
+              ngModel
+            />
+          </div>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Comp Name"
+          ngModel
+          name="newCompName"
+        />
+        <div
+          class="form-group d-flex gap-3 my-1"
+          formGroup="newComp"
+          ngModelGroup="champions"
+        >
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Champion 1"
+            name="champ1"
+            ngModel
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Champion 2"
+            name="champ2"
+            ngModel
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Champion 3"
+            name="champ3"
+            ngModel
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Champion 4"
+            name="champ4"
+            ngModel
+          />
+        </div>
+
+        <!-- //////////// -->
+        <!--  More Fields -->
+        <!-- //////////// -->
+
         <button
           *ngIf="!moreFields"
           class="btn btn-primary"
@@ -47,19 +152,54 @@
         <div
           *ngIf="moreFields"
           class="hidden form-group d-flex gap-3 my-1"
-          formGroup="newCompExtra"
+          ngModelGroup="extraChampions"
         >
-          <input type="text" class="form-control" placeholder="Champion 5" />
-          <input type="text" class="form-control" placeholder="Champion 6" />
-          <input type="text" class="form-control" placeholder="Champion 7" />
-          <input type="text" class="form-control" placeholder="Champion 8" />
-          <input type="text" class="form-control" placeholder="Champion 9" />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Champion 5"
+            name="champ5"
+            ngModel
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Champion 6"
+            name="champ6"
+            ngModel
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Champion 7"
+            name="champ7"
+            ngModel
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Champion 8"
+            name="champ8"
+            ngModel
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Champion 9"
+            name="champ9"
+            ngModel
+          />
         </div>
       </div>
       <div class="d-flex gap-5 my-3 justify-content-center mt-5">
-        <button class="btn btn-danger" (click)="cancelMatch()">Cancel</button>
-        <button class="btn btn-success">Submit</button>
+        <button class="btn btn-danger" (click)="onCloseWindow()">Cancel</button>
+        <button
+          class="btn btn-success"
+          (click)="newComp ? submitNewComp(compForm) : submitMatch(compForm)"
+        >
+          Submit
+        </button>
       </div>
-    </div>
+    </form>
   </div>
 </div>

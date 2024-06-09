@@ -33,6 +33,34 @@ export class HttpRequestsService {
     });
   }
 
+  addComp(data: any): Observable<any> {
+    return this.http.post<any>("http://localhost:8080/comp/create", data, {
+      observe: "response",
+    });
+  }
+
+  getAllComps(name: string): Observable<any> {
+    return this.http.get("http://localhost:8080/comp/getAll");
+  }
+
+  createMatch(
+    victory: boolean,
+    ipMatch: number,
+    compName: string,
+    playerName: string
+  ): Observable<any> {
+    const data = {
+      victory: victory,
+      ipMatch: ipMatch,
+      compName: compName,
+      playerName: playerName,
+    };
+    return this.http.post("http://localhost:8080/match/create", data, {
+      observe: "response",
+    });
+  }
+
+  /// FOR TESTING PURPOSES
   addDummyData() {
     this.addPost("Test1", "bronze", 1, 29).subscribe();
     this.addPost("Test2", "silver", 2, 39).subscribe();

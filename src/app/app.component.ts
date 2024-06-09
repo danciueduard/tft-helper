@@ -55,5 +55,8 @@ export class AppComponent implements OnInit {
         ? (this.activeProfile = null)
         : (this.activeProfile = response.playerName!);
     });
+
+    // TEMPORARY !!!! MUST BE REMOVED!
+    this.dataStorageService.setActiveProfile("Test1");
   }
 }

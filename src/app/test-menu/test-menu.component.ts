@@ -40,4 +40,8 @@ export class TestMenuComponent {
     this.dataStorageService.logoutProfile();
     console.log("logged out");
   }
+
+  onTestUser() {
+    this.dataStorageService.setActiveProfile("Test1");
+  }
 }
