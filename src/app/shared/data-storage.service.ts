@@ -19,7 +19,8 @@ export class DataStorageService {
           response?.league!,
           response?.lpPlayer!,
           response?.matches!,
-          response?.playerName!
+          response?.playerName!,
+          response?.tier
         )
       );
     });
@@ -31,5 +32,23 @@ export class DataStorageService {
 
   logoutProfile() {
     this.activeProfileSubject.next(null);
+  }
+
+  userUpdated(name: string) {
+    this.httpRequestsService
+      .fetchProfileByName(name)
+      .subscribe((res) =>
+        this.activeProfileSubject.next(
+          new LoadedProfile(
+            res?.league!,
+            res?.lpPlayer!,
+            res?.matches!,
+            res?.playerName!,
+            res?.tier
+          )
+        )
+      );
+    this.setActiveProfile(name);
+    return this.getActiveProfile();
   }
 }

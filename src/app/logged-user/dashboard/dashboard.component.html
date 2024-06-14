@@ -8,9 +8,10 @@
             <img src="../../../assets/female-avatar.png" width="100px" alt="" />
             <div>
               <h4>{{ activeProfile.playerName }}</h4>
+              <!-- <h4>{{ activeProfile.playerName }}</h4> -->
               <div class="d-flex gap-2">
                 <p [ngStyle]="{ textTransform: 'capitalize' }">
-                  {{ activeProfile.league }} (tier coming soon...)
+                  {{ activeProfile.league }} {{ activeProfile.tier }}
                 </p>
                 <p>{{ activeProfile.lpPlayer }} LP</p>
               </div>
@@ -34,6 +35,7 @@
               <div class="d-flex justify-content-between px-5">
                 <p>Comp name: {{ match.comp.compName }}</p>
                 <p>Champs: {{ match.comp.startChamps | capitalizeArray }}</p>
+                <p>LP (coming soon...)</p>
                 <p>{{ match.victory ? "Win" : "Lose" }}</p>
               </div>
             </li>

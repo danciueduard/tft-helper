@@ -24,7 +24,7 @@ export class HttpRequestsService {
     const data = {
       name: name,
       league: league,
-      tier: tier,
+      leagueTier: tier,
       lp: lp,
     };
     // Using { observe: 'response' } to observe the full HTTP response

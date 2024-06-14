@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Form, FormsModule } from "@angular/forms";
 import { HttpRequestsService } from "../../../shared/http-requests.service";
+import { DataStorageService } from "../../../shared/data-storage.service";
 
 @Component({
   selector: "app-create-match",
@@ -17,7 +18,10 @@ export class CreateMatchComponent implements OnInit {
   moreFields: boolean = false;
   newComp: boolean = false;
 
-  constructor(private httpRequestsService: HttpRequestsService) {}
+  constructor(
+    private httpRequestsService: HttpRequestsService,
+    private dataStorageService: DataStorageService
+  ) {}
 
   ngOnInit(): void {
     // load existing comps into the dropdown menu
@@ -81,5 +85,33 @@ export class CreateMatchComponent implements OnInit {
 
   onCloseWindow() {
     this.closeWindow.emit(true);
+  }
+
+  submitMatchWithNewComp(form: Form | any) {
+    const newComp = form.form.value.newComp;
+    const data = {
+      playerName: this.playerName,
+      compName: newComp.newCompName,
+      startChamps: this.createChampionsArray(
+        newComp.champions,
+        newComp.extraChampions
+      ),
+      tier: newComp.tier,
+    };
+    // console.log(data);
+    // console.log(form.form.value);
+    this.httpRequestsService.addComp(data).subscribe((res) => {
+      if (res.ok) {
+        this.httpRequestsService
+          .createMatch(
+            newComp.win,
+            newComp.lp,
+            newComp.newCompName,
+            this.playerName
+          )
+          .subscribe((res) => console.log("createMatch", res));
+        this.onCloseWindow();
+      }
+    });
   }
 }

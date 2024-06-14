@@ -5,16 +5,19 @@ export class LoadedProfile {
   lpPlayer: number;
   matches: [] = [];
   playerName: string;
+  tier: number;
 
   constructor(
     league: string,
     lpPlayer: number,
     matches: [],
-    playerName: string
+    playerName: string,
+    tier: number
   ) {
     this.league = league;
     this.lpPlayer = lpPlayer;
     this.matches = matches;
     this.playerName = playerName;
+    this.tier = tier;
   }
 }

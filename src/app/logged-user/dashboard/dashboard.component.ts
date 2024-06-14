@@ -20,7 +20,7 @@ import { HttpRequestsService } from "../../shared/http-requests.service";
   styleUrl: "./dashboard.component.css",
 })
 export class DashboardComponent implements OnInit {
-  activeProfile: any | LoadedProfile;
+  activeProfile: any | LoadedProfile = {};
   activeProfileComps: any[] = [];
   createMode: boolean = false;
 
@@ -30,6 +30,13 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.loadUser();
+      console.log(this.activeProfile);
+    }, 200);
+  }
+
+  loadUser() {
     this.dataStorageService
       .getActiveProfile()
       .pipe((data: any) => (this.activeProfile = data.source.value));
@@ -41,5 +48,11 @@ export class DashboardComponent implements OnInit {
 
   createModeOff() {
     this.createMode = false;
+    // console.log(this.activeProfile);
+    setTimeout(() => {
+      this.dataStorageService
+        .userUpdated(this.activeProfile.playerName)
+        .subscribe((res) => (this.activeProfile = res));
+    }, 200);
   }
 }

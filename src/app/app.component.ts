@@ -57,6 +57,6 @@ export class AppComponent implements OnInit {
     });
 
     // TEMPORARY !!!! MUST BE REMOVED!
-    this.dataStorageService.setActiveProfile("Test1");
+    this.dataStorageService.setActiveProfile("Test");
   }
 }

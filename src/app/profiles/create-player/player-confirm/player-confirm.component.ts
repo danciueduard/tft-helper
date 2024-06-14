@@ -42,7 +42,7 @@ import {
 export class PlayerConfirmComponent implements OnInit {
   name: string;
   league: string;
-  tier: number;
+  leagueTier: number;
   lp: number;
 
   isLoading: boolean = false;
@@ -66,7 +66,7 @@ export class PlayerConfirmComponent implements OnInit {
     this.validForm = this.route.snapshot.parent?.data["validForm"];
     this.name = this.route.snapshot.queryParams["name"];
     this.league = this.route.snapshot.queryParams["league"];
-    this.tier = this.route.snapshot.queryParams["tier"];
+    this.leagueTier = this.route.snapshot.queryParams["tier"];
     this.lp = this.route.snapshot.queryParams["lp"];
   }
 
@@ -79,7 +79,7 @@ export class PlayerConfirmComponent implements OnInit {
     const nameWithoutSpaces = this.name.replace(/\s/g, "");
     // Just in case the name contains any spaces. Can cause bugs with backend interraction
     this.dataStorageService
-      .addPost(nameWithoutSpaces, this.league, this.tier, this.lp)
+      .addPost(nameWithoutSpaces, this.league, this.leagueTier, this.lp)
       .subscribe({
         next: (success) => {
           this.submitMessage.valid = true;
@@ -96,7 +96,7 @@ export class PlayerConfirmComponent implements OnInit {
           } else this.submitMessage.message = error.error.DES;
           setTimeout(() => {
             this.router.navigate(["/new"]);
-          }, 3000);
+          }, 1500);
         },
         complete: () => console.info("complete"),
       });

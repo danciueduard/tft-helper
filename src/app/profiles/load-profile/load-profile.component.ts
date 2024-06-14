@@ -1,6 +1,6 @@
 import { trigger, transition, style, animate } from "@angular/animations";
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { RouterModule } from "@angular/router";
+import { Router, RouterModule } from "@angular/router";
 import { Profile } from "../../shared/models/profile.model";
 import { DataStorageService } from "../../shared/data-storage.service";
 import { Observable, Subscription } from "rxjs";
@@ -29,7 +29,8 @@ export class LoadProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private httpRequestsService: HttpRequestsService,
-    private dataStorageService: DataStorageService
+    private dataStorageService: DataStorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -38,9 +39,10 @@ export class LoadProfileComponent implements OnInit, OnDestroy {
 
   useProfile(name: string) {
     this.dataStorageService.setActiveProfile(name);
+    setTimeout(() => {
+      this.router.navigate(["/dashboard"]);
+    }, 500);
   }
-
-
 
   loadProfiles() {
     this.profilesSubscription = this.httpRequestsService

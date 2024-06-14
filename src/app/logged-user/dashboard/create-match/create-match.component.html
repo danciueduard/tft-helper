@@ -63,22 +63,34 @@
         <label class="mt-5 h5">New Comp:</label>
 
         <div
-          class="form-check form-switch d-flex gap-3 align-items-center mb-3"
+          class="d-flex gap-3 align-items-center p-2"
+          [ngClass]="{
+            'border border-2 rounded-4 border-danger':
+              compForm.invalid && compForm.touched
+          }"
         >
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="newCompWinOrLose"
-            ngModel
-            name="win"
-          />
-          <label class="form-check-label" for="flexSwitchCheckDefault"
-            >Win</label
-          >
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="newCompWinOrLose"
+              ngModel
+              name="win"
+            />
+            <label class="form-check-label" for="flexSwitchCheckDefault"
+              >Win</label
+            >
+          </div>
 
           <div class="d-flex gap-2 align-items-center px-5">
             <label for="compName">Tier</label>
-            <select class="form-select" id="tier" name="tier" ngModel>
+            <select
+              class="form-select"
+              id="tier"
+              name="tier"
+              ngModel
+              required=""
+            >
               <option value="S">S</option>
               <option value="A">A</option>
               <option value="B">B</option>
@@ -93,8 +105,12 @@
               type="number"
               name="lp"
               ngModel
+              required=""
             />
           </div>
+          <p *ngIf="compForm.invalid && compForm.touched" class="text-danger">
+            Requiered!
+          </p>
         </div>
         <input
           type="text"
@@ -195,7 +211,10 @@
         <button class="btn btn-danger" (click)="onCloseWindow()">Cancel</button>
         <button
           class="btn btn-success"
-          (click)="newComp ? submitNewComp(compForm) : submitMatch(compForm)"
+          [disabled]="compForm.invalid"
+          (click)="
+            newComp ? submitMatchWithNewComp(compForm) : submitMatch(compForm)
+          "
         >
           Submit
         </button>

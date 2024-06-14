@@ -1,4 +1,4 @@
-<div class="position-absolute d-flex flex-column gap-3">
+<div *ngIf="debugMode" class="position-absolute d-flex flex-column gap-3">
   <a [routerLink]="['/new']" class="btn btn-primary">NEW</a>
   <a [routerLink]="['/load']" class="btn btn-primary">LOAD</a>
   <a [routerLink]="['/dashboard']" class="btn btn-primary">DASHBOARD</a>
