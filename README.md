@@ -2,6 +2,9 @@
 
 Version: Beta
 
+Application created for League of Legends TFT players that gives the ability to create profiles, add compositions and add create matches with those compositions.
+Backend created by AlmaCN - https://github.com/AlmaCN/TFT-Helper-be.git
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.1.
 
 ## Development server
