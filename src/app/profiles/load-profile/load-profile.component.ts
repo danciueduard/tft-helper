@@ -64,7 +64,6 @@ export class LoadProfileComponent implements OnInit, OnDestroy {
         error: (error: Error) => {
           this.errors = "Error loading the data...";
           console.log(error);
-          // Handle the error as needed, e.g., display an error message
         },
       });
   }
